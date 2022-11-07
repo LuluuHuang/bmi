@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            background-color: rgb(236, 215, 207);
+        }
+        .bmi{
+            width: 500px;
+            height: 300px;
+            background-color: rgb(176, 210, 237);
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            justify-content: space-evenly;
+            margin: auto;
+            margin-top: 80px;
+            border-radius: 10px;
+            border: 2px solid black;
+        }
+        .title{
+            font-size: 35px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .hight,.weight{
+            font-size: 20px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn{
+            margin: 10px auto;
+        }
+        input{
+            width: 150px;
+            height: 30px;
+        }
+        .ans{
+            /* position: absolute;
+            visibility: hidden;
+            overflow: hidden; */
+            width: 400px;
+            height: 200px;
+            background-color: lightslategray;
+            display: flex;
+            flex-direction: column;
+            margin: 20px auto;
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid black;
+            font-size: 18px;
+        }
+        .bmi_ans,.body,.suggestion{
+            margin: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="bmi">
+        <span class="title">BMI計算機</span>
+        <span class="hight">請輸入身高(cm)：<input class="hight_input" value=""></span>
+        <span class="weight">請輸入體重(kg)：<input class="weight_input" value=""></span>
+        <div class="btn">
+            <button class="start">開始計算</button>
+            <button class="reset">重新計算</button>
+        </div>
+    </div>
+    <div class="ans" id="popupcontent">
+        <div class="bmi_ans">BMI值：<span id="output1"></span></div>
+        <div class="body">身體狀態：<span id="output2"></span></div>
+        <div class="suggestion">參考建議：<spana id="output3"></span></div>
+    </div>
+
+    <script>
+        const cm = document.querySelector('.hight_input')
+        const kg = document.querySelector('.weight_input')
+        const btn_start = document.querySelector('.start')
+        const btn_reset = document.querySelector('.reset')
+        const bmi = document.querySelector('.bmi_ans')
+        const body = document.querySelector('.body')
+        const sug = document.querySelector('.suggestion')
+        const ans = document.querySelector('.ans')
+        const output1 = document.querySelector('#output1')
+        const output2 = document.querySelector('#output2')
+        const output3 = document.querySelector('#output3') 
+
+
+        btn_start.onclick = function(){
+            if(cm.value < 0 ){
+            ans.innerHTML = '請輸入正確內容'
+            }
+            
+            let bmi_output = kg.value/(cm.value/100)**2
+        
+            if(bmi_output > 0){
+                output1.innerHTML = bmi_output.toFixed(1)
+            }
+                if(bmi_output < 18.5){
+                    output2.innerHTML = '過輕'
+                    output3.innerHTML = '多吃點肉肉'
+                    console.log(output1)
+                    }else{
+                        if(bmi_output <= 24){
+                            output2.innerHTML = '正常'
+                            output3.innerHTML = '讚喔' 
+                        }else{
+                            if(bmi_output <= 27){
+                                output2.innerHTML = '過重'
+                                output3.innerHTML = '該注意囉' 
+                            }else{
+                                if(bmi_output <= 30){
+                                    output2.innerHTML = '輕度肥胖'
+                                    output3.innerHTML = '你有點胖了喔'
+                                }else{
+                                    if(bmi_output <= 35){
+                                        output2.innerHTML = '中度肥胖'
+                                        output3.innerHTML = '你真的胖了喔'
+                                    }else{
+                                            output2.innerHTML = '重度肥胖'
+                                            output3.innerHTML = '減肥了啦胖子'
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+            
+        
+           
+    
+
+    btn_reset.onclick = function(){
+        output1.innerHTML = ""
+        output2.innerHTML = ""
+        output3.innerHTML = ""
+        kg.value = ""
+        cm.value = ""
+    }
+
+
+
+    </script>
+</body>
+</html>
